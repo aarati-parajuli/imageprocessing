@@ -1,0 +1,12 @@
+import cv2
+import numpy as np
+
+file_name = "download.png" # your signature image...
+
+image = cv2.imread(file_name, 1)
+image = cv2.cvtColor(image, cv2.COLOR_BGR2RGBA)
+# note: [R,G,B,255] below, so first 3 numbers [255,255,255] are your white
+# background pixels to be converted to RGBA setting of [0,0,0,0] (transparent)
+image[np.all(image == [255, 255, 255, 255], axis=2)] = [0, 0, 0, 0]
+
+cv2.imwrite("hey.png", image)
